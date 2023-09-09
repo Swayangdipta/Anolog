@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const backend = 'http://localhost:9000/api'
+const backend = process.env.REACT_APP_BACKEND
 
 export const publishBlog = (data,userId,token) => {
     return axios.post(`${backend}/blog/create/${userId}`,data,{

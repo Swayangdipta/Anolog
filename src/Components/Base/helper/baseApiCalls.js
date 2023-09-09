@@ -3,7 +3,7 @@ import axios from "axios"
 const backend = process.env.REACT_APP_BACKEND
 
 export const getBlogs = (limit = "10",pageNumber = "1") => {
-    return axios.get(`http://localhost:9000/api/blogs?limit=${limit}&page=${pageNumber}`).then(response => response.data).catch(e => e)
+    return axios.get(`${backend}/blogs?limit=${limit}&page=${pageNumber}`).then(response => response.data).catch(e => e)
 }
 
 export const getBlogsCount = () => {
@@ -11,7 +11,7 @@ export const getBlogsCount = () => {
 }
 
 export const getCategories = () => {
-    return axios.get(`http://localhost:9000/api/categories`).then(response => response.data).catch(e => e)
+    return axios.get(`${backend}/api/categories`).then(response => response.data).catch(e => e)
 }
 
 export const getUserLikes = userId => {
