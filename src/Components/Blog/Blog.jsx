@@ -105,7 +105,7 @@ const Blog = () => {
 
   return (
     <Base>
-    <div autoFocus className={`w-[90vw] mx-auto mt-[80px] min-h-screen h-max p-[30px] rounded-md border-[1px] border-zinc-700 bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl ${filters.theme === 'dark' ? 'bg-opacity-20' : 'bg-opacity-60'}`}>
+    <div autoFocus className={`w-[95vw] md:w-[90vw] mx-auto mt-[80px] min-h-screen h-max p-[30px] rounded-md border-[1px] border-zinc-700 bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl ${filters.theme === 'dark' ? 'bg-opacity-20' : 'bg-opacity-60'}`}>
       {
         blog ? (
           <div>
@@ -127,7 +127,7 @@ const Blog = () => {
                   <div className='p-2 w-max rounded bg-rose-700 absolute left-[-120px] text-zinc-300 hidden group-hover:block'>Report Blog</div>
                 </div>
             </div>
-            <h1 className='mt-[20px] text-zinc-100 text-[40px]'>{blog.title}</h1>
+            <h1 className='mt-[20px] text-zinc-100 text-[32px] md:text-[40px]'>{blog.title}</h1>
             <span className='flex items-center gap-[40px]'>
               <span className='flex items-center gap-[10px] text-zinc-400'>
                 {blog.author && blog.author.profilePicture ? (

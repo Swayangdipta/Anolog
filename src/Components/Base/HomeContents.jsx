@@ -51,30 +51,35 @@ const HomeContents = () => {
         }).catch(e=> console.log(e))
     },[pageNumber])
   return (
-    <div className='w-full h-max flex gap-[30px] justify-between'>
-        <div className='w-[300px]'></div>
-        <div className='w-[calc(100%_-_400px)] flex flex-col justify-center items-center gap-[20px] relative top-0 pb-[70px]'>
+    <div className='w-full min-h-[80vh] h-max flex gap-[30px] justify-between'>
+        <div className='w-[300px] hidden md:block'></div>
+        <div className='w-[95%] mx-auto md:mx-0 md:w-[calc(100%_-_400px)] flex flex-col justify-center items-center gap-[20px] relative top-0 pb-[70px]'>
             {
                 blogs.length > 0 && blogs.map((blog,index) => (
                     <BlogCard blog={blog} key={index} />
                 ))
             }
+            {
+                blogs.length > 0 && (
+                <div id='pagination' className='flex gap-4 absolute bottom-2'>
+                    {numbersToDisplay.map((num,index) => (
+                        <div key={index} onClick={e=>setPageNumber(num)} className={`w-[30px] h-[30px] rounded-full flex items-center justify-center cursor-pointer ${num === pageNumber ? 'bg-rose-700 text-zinc-100' : 'bg-zinc-100'}`}>{num}</div>
+                    ))}
+                    {
+                        totalPages > 5 && (<div className='text-zinc-100'>...</div>)
+                    }
+                    {
+                        totalPages > 6 && (
+                            <div className={`w-[30px] h-[30px] rounded-full flex items-center justify-center cursor-pointer ${pageNumber === totalPages ? 'bg-rose-700 text-zinc-100' : 'bg-zinc-100'}`}>{totalPages}</div>
+                        )
+                    }
+                </div>                    
+                )
+            }
 
-            <div id='pagination' className='flex gap-4 absolute bottom-2'>
-                {numbersToDisplay.map((num,index) => (
-                    <div key={index} onClick={e=>setPageNumber(num)} className={`w-[30px] h-[30px] rounded-full flex items-center justify-center cursor-pointer ${num === pageNumber ? 'bg-rose-700 text-zinc-100' : 'bg-zinc-100'}`}>{num}</div>
-                ))}
-                {
-                    totalPages > 5 && (<div className='text-zinc-100'>...</div>)
-                }
-                {
-                    totalPages > 6 && (
-                        <div className={`w-[30px] h-[30px] rounded-full flex items-center justify-center cursor-pointer ${pageNumber === totalPages ? 'bg-rose-700 text-zinc-100' : 'bg-zinc-100'}`}>{totalPages}</div>
-                    )
-                }
-            </div>
+
         </div>
-        <div className='w-[60px]'></div>
+        <div className='w-[60px] hidden md:block'></div>
     </div>
   )
 }

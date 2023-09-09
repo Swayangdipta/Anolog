@@ -13,7 +13,7 @@ const Filters = () => {
     setFilters({...filters,[field]: value})
   }
   return (
-    <div className='w-[60px] h-max pb-[10px] rounded bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-20 border-[1px] border-zinc-700 fixed top-[90px] right-[4%]'>
+    <div className='w-[60px] h-max pb-[10px] rounded bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-20 border-[1px] border-zinc-700 fixed top-[90px] right-[4%] hidden md:block'>
         <h4 className='w-full py-[5px] bg-black rounded-t text-zinc-500 text-center'>Filters</h4>
         
         <div className="w-[40px] h-[40px] rounded bg-black relative top-0 m-[auto] mt-[10px] flex items-center justify-center cursor-pointer group">

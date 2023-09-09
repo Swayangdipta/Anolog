@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const BlogCard = ({blog}) => {
   return (
-    <Link to={`/blog/${blog._id}`} className='w-[80%]'>
+    <Link to={`/blog/${blog._id}`} className='w-full md:w-[80%]'>
         <div className='w-full m-auto h-max rounded cursor-pointer bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-20 border-[1px] border-zinc-700 hover:shadow-2xl hover:border-green-400'>
             <div className="relative w-[full] pb-[50.25%]">
                 <img src={blog.coverImage} alt={blog.title} className='absolute inset-0 w-full h-full object-cover rounded-t ' />

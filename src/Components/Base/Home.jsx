@@ -25,7 +25,7 @@ const Home = () => {
   },[])
   return (
       <Base>
-        <div className='w-[90%] min-h-screen h-max flex m-auto mt-[90px] relative top-0'>
+        <div className='w-[95%] md:w-[90%] min-h-screen h-max flex flex-col m-auto mt-[70px] md:mt-[90px] relative top-0'>
           <Featured />
           <HomeContents />
           <Filters />
