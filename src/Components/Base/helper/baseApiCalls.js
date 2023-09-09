@@ -11,7 +11,7 @@ export const getBlogsCount = () => {
 }
 
 export const getCategories = () => {
-    return axios.get(`${backend}/api/categories`).then(response => response.data).catch(e => e)
+    return axios.get(`${backend}/categories`).then(response => response.data).catch(e => e)
 }
 
 export const getUserLikes = userId => {
