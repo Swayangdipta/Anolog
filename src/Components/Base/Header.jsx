@@ -25,7 +25,7 @@ const Header = () => {
 
     {
       currentPage !== '/auth' && (
-        <div className='flex justify-center items-center gap-[30px] w-max'>
+        <div className='flex justify-end sm:justify-center items-center gap-[10px] sm:gap-[30px] w-max'>
             <div className='w-[40px] cursor-pointer h-[40px] text-[24px] text-zinc-900 hover:text-emerald-600 bg-zinc-300 rounded-md flex items-center justify-center border-0' onClick={e => setIsSearchOpen(!isSearchOpen)}>
                 <RiSearchFill />
             </div>
@@ -37,7 +37,7 @@ const Header = () => {
               ) : (
               <>
                 <Link to="/publish">
-                  <button className={`w-max h-[40px] px-4 rounded-md font-[600] text-white cursor-pointer transition ease-in-out delay-100 flex items-center gap-[10px] ${filters.theme === 'dark' ? 'bg-purple-700 hover:bg-violet-700' : 'bg-indigo-800 hover:bg-sky-900'}`}>
+                  <button className={`w-max h-[40px] px-4 rounded-md font-[600] text-white cursor-pointer transition ease-in-out delay-100 hidden sm:flex items-center gap-[10px] ${filters.theme === 'dark' ? 'bg-purple-700 hover:bg-violet-700' : 'bg-indigo-800 hover:bg-sky-900'}`}>
                     <IoCreate className='text-[24px] mt-[-2px]' />
                     <span>Publish</span>
                   </button>

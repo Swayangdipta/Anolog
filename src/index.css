@@ -151,3 +151,33 @@ body{
     color: #92ffbc;
     margin-top: 20px;
 }
+
+@media screen and (max-width: 640px) {
+    .blogBody p{
+        font-size: 16px;
+    }
+
+    .blogBody h1{
+        font-size: 28px;
+    }
+
+    .blogBody h2{
+        font-size: 24px;
+    }
+
+    .blogBody h3{
+        font-size: 20px;
+    }
+
+    .blogBody h5{
+        font-size: 18px;
+    }
+
+    .blogBody h6{
+        font-size: 16px;
+    }
+
+    .blogBody h1{
+        font-size: 28px;
+    }
+}

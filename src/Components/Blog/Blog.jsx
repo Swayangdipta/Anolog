@@ -105,29 +105,29 @@ const Blog = () => {
 
   return (
     <Base>
-    <div autoFocus className={`w-[95vw] md:w-[90vw] mx-auto mt-[80px] min-h-screen h-max p-[30px] rounded-md border-[1px] border-zinc-700 bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl ${filters.theme === 'dark' ? 'bg-opacity-20' : 'bg-opacity-60'}`}>
+    <div autoFocus className={`w-screen sm:w-[90vw] mx-auto mt-[80px] min-h-screen h-max p-[30px] sm:rounded-md border-[1px] border-zinc-700 bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl ${filters.theme === 'dark' ? 'bg-opacity-20' : 'bg-opacity-60'}`}>
       {
         blog ? (
           <div>
             <div className="relative top-0 w-[full] pb-[50.25%]">
                 <img src={blog.coverImage} alt={blog.title} className='absolute inset-0 w-full h-full object-cover rounded ' />
-                <div className='absolute bottom-[20px] right-[80px] group flex items-center justify-center'>
-                  <button className='w-[40px] h-[40px] rounded-full bg-zinc-100 shadow-lg flex items-center justify-center' onClick={handleLike} disabled={isLoading}>{isLoading ? (<RiLoader3Fill className='text-[24px] text-rose-700 animate-spin' />) : liked ? (<RiHeartFill className='text-[24px] text-rose-700' />) : (<RiHeartLine className='text-[24px] text-rose-700' />)}</button>
+                <div className='absolute bottom-[10px] right-[50px] group flex items-center justify-center'>
+                  <button className='w-[25px] h-[25px] md:w-[40px] w-[25px] h-[25px] md:h-[40px] rounded-full bg-zinc-100 shadow-lg flex items-center justify-center' onClick={handleLike} disabled={isLoading}>{isLoading ? (<RiLoader3Fill className='text-[19px] sm:text-[24px] text-rose-700 animate-spin' />) : liked ? (<RiHeartFill className='text-[19px] sm:text-[24px] text-rose-700' />) : (<RiHeartLine className='text-[24px] text-rose-700' />)}</button>
                   <div className='p-2 rounded bg-black absolute bottom-[-50px] text-zinc-300 hidden group-hover:block'>{liked ? 'Dislike' : 'Like'}</div>
                 </div>
-                <div className='absolute bottom-[20px] right-[20px] group flex items-center justify-center'>
-                  <button className='w-[40px] h-[40px] rounded-full bg-zinc-100 shadow-lg flex items-center justify-center' onClick={copyToClipboard}>{isCopied ? (<TiTick className='text-[24px] text-emerald-700' />) : (<RiShareForwardFill className='text-[24px] text-orange-700' />)}</button>
+                <div className='absolute bottom-[10px] right-[10px] group flex items-center justify-center'>
+                  <button className='w-[25px] h-[25px] md:w-[40px] w-[25px] h-[25px] md:h-[40px] rounded-full bg-zinc-100 shadow-lg flex items-center justify-center' onClick={copyToClipboard}>{isCopied ? (<TiTick className='text-[19px] sm:text-[24px] text-emerald-700' />) : (<RiShareForwardFill className='text-[19px] sm:text-[24px] text-orange-700' />)}</button>
                   <div className='p-2 rounded bg-black absolute bottom-[-50px] text-zinc-300 hidden group-hover:block'>Share</div>
                 </div>
-                <div className='absolute top-[20px] right-[20px] group flex items-center justify-center' onClick={e=>{
+                <div className='absolute top-[10px] right-[10px] group flex items-center justify-center' onClick={e=>{
                   setReport({type: 'Blog',id: blog._id})
                   setIsReportOpen(true)
                 }}>
-                  <button className='w-[40px] h-[40px] rounded-full bg-zinc-100 shadow-lg flex items-center justify-center'><MdReport className='text-[24px] text-rose-900' /></button>
+                  <button className='w-[25px] h-[25px] md:w-[40px] w-[25px] h-[25px] md:h-[40px] rounded-full bg-zinc-100 shadow-lg flex items-center justify-center'><MdReport className='text-[19px] sm:text-[24px] text-rose-900' /></button>
                   <div className='p-2 w-max rounded bg-rose-700 absolute left-[-120px] text-zinc-300 hidden group-hover:block'>Report Blog</div>
                 </div>
             </div>
-            <h1 className='mt-[20px] text-zinc-100 text-[32px] md:text-[40px]'>{blog.title}</h1>
+            <h1 className='mt-[20px] text-zinc-100 text-[28px] sm:text-[40px]'>{blog.title}</h1>
             <span className='flex items-center gap-[40px]'>
               <span className='flex items-center gap-[10px] text-zinc-400'>
                 {blog.author && blog.author.profilePicture ? (
@@ -147,7 +147,7 @@ const Blog = () => {
               }              
             </span>
 
-              <div className='blogBody mt-[50px]'>
+              <div className='blogBody mt-[20px] sm:mt-[50px]'>
                 {
                   parse(blog.blog)
                 }
@@ -155,7 +155,7 @@ const Blog = () => {
 
               <CommentForm blogId={blog._id} />
           </div>
-        ) : ('Loading...')
+        ) : (<h1 className="text-center text-zinc-400">Loading...</h1>)
       }
     </div>
 
