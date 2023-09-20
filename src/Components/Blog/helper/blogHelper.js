@@ -55,3 +55,19 @@ export const createReport = (report,userId,token) => {
         }
     }).then(response => response.data).catch(e => e)
 }
+
+export const updateBlog = (userId,token,blogId,blog) => {
+    return axios.put(`${backend}/blog/update/${userId}/${blogId}`,blog,{
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    }).then(response => response.data).catch(e => e)
+}
+
+export const deleteBlog = (userId,token,blogId,categoryId) => {
+    return axios.delete(`${backend}/blog/remove/${userId}/${blogId}/${categoryId}`,{},{
+        headers: {
+            Authorization: `Bearer ${token}`,
+        }
+    }).then(response => response.data).catch(e => e)
+}

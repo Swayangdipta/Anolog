@@ -111,7 +111,7 @@ const Blog = () => {
           <div>
             <div className="relative top-0 w-[full] pb-[50.25%]">
                 <img src={blog.coverImage} alt={blog.title} className='absolute inset-0 w-full h-full object-cover rounded ' />
-                <div className='absolute bottom-[10px] right-[50px] group flex items-center justify-center'>
+                <div className='absolute bottom-[10px] right-[60px] group flex items-center justify-center'>
                   <button className='w-[25px] h-[25px] md:w-[40px] w-[25px] h-[25px] md:h-[40px] rounded-full bg-zinc-100 shadow-lg flex items-center justify-center' onClick={handleLike} disabled={isLoading}>{isLoading ? (<RiLoader3Fill className='text-[19px] sm:text-[24px] text-rose-700 animate-spin' />) : liked ? (<RiHeartFill className='text-[19px] sm:text-[24px] text-rose-700' />) : (<RiHeartLine className='text-[24px] text-rose-700' />)}</button>
                   <div className='p-2 rounded bg-black absolute bottom-[-50px] text-zinc-300 hidden group-hover:block'>{liked ? 'Dislike' : 'Like'}</div>
                 </div>
@@ -153,7 +153,7 @@ const Blog = () => {
                 }
               </div>
 
-              <CommentForm blogId={blog._id} />
+              {user && token && (<CommentForm blogId={blog._id} />)}
           </div>
         ) : (<h1 className="text-center text-zinc-400">Loading...</h1>)
       }

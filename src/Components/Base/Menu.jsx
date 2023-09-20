@@ -5,7 +5,7 @@ import { FaBloggerB } from 'react-icons/fa'
 import { logout } from '../Auth/helper/authApiCalls'
 import { toast } from 'react-toastify'
 import { deAuthenticateUser } from '../../utils/LS_Helper'
-import { Navigate } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 const Menu = ({setMenuOpen = f=>f}) => {
     const [loggedOut,setLoggedOut] = useState(false)
@@ -39,14 +39,20 @@ const Menu = ({setMenuOpen = f=>f}) => {
         {
             loggedOut && (<Navigate to='/' />)
         }
-        <div className={`w-full h-[40px] rounded bg-violet-700 flex items-center px-4 gap-[10px] font-[600] text-zinc-100 cursor-pointer shadow-lg hover:bg-gradient-to-r hover:from-violet-700 hover:to-indigo-700`}>
-            <RiProfileFill className='text-[26px]' />
-            <span>My Profile</span>
-        </div>
-        <div className={`w-full h-[40px] rounded bg-violet-700 flex items-center px-4 gap-[10px] font-[600] text-zinc-100 cursor-pointer shadow-lg hover:bg-gradient-to-r hover:from-violet-700 hover:to-indigo-700`}>
-            <FaBloggerB className='text-[24px]' />
-            <span>My Blogs</span>
-        </div>
+
+        <Link to='/profile'>
+            <div className={`w-full h-[40px] rounded bg-violet-700 flex items-center px-4 gap-[10px] font-[600] text-zinc-100 cursor-pointer shadow-lg hover:bg-gradient-to-r hover:from-violet-700 hover:to-indigo-700`}>
+                <RiProfileFill className='text-[26px]' />
+                <span>My Profile</span>
+            </div>
+        </Link>
+
+        <Link to='/user/blogs' >
+            <div className={`w-full h-[40px] rounded bg-violet-700 flex items-center px-4 gap-[10px] font-[600] text-zinc-100 cursor-pointer shadow-lg hover:bg-gradient-to-r hover:from-violet-700 hover:to-indigo-700`}>
+                <FaBloggerB className='text-[24px]' />
+                <span>My Blogs</span>
+            </div>
+        </Link>
 
         <div className={`w-full h-[40px] rounded bg-rose-700 flex items-center px-4 gap-[10px] font-[600] text-zinc-100 cursor-pointer shadow-lg hover:bg-gradient-to-r hover:from-rose-700 hover:to-pink-600`} onClick={e => !isLoading && handleLogout() }>
             {

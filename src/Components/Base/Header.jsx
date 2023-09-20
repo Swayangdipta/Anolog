@@ -21,7 +21,9 @@ const Header = () => {
   return (
     <div className='w-screen h-[70px] z-[100000] px-[5vw] flex items-center justify-between fixed top-0 left-0 bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-20 border-b-[1px] border-zinc-700'>
 
-    <img src="https://img.logoipsum.com/285.svg" alt="Website Logo" />
+    <Link to='/'>
+      <img src="https://img.logoipsum.com/285.svg" alt="Website Logo" />
+    </Link>
 
     {
       currentPage !== '/auth' && (

@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { toast } from 'react-toastify';
-import { publishBlog } from './helper/blogHelper';
+import { getBlog, publishBlog, updateBlog } from './helper/blogHelper';
 import Base from '../Base/Base';
 import { getCategories } from '../Base/helper/baseApiCalls';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import { isAuthenticated } from '../../utils/LS_Helper';
 import { RiLoader3Fill } from 'react-icons/ri';
+import { useParams } from 'react-router-dom';
 
 const BlogEditor = () => {
     const [value,setValue] = useState('')
@@ -23,6 +24,8 @@ const BlogEditor = () => {
             id: undefined
         }
     })
+
+    const {blogId} = useParams()
 
     const {title,description,coverImage,category} = formValues
 
@@ -62,18 +65,34 @@ const BlogEditor = () => {
             category: category.id
         }
 
-        publishBlog(blog,user._id,token).then(data => {
-            if(data.response?.data.error){
-                setLoading(false)
-                return toast.error(data.response.data.message[0])
-            }else if(data.name === 'AxiosError'){
-                setLoading(false)
-                return toast.error("Faild to publish blog! Try again.")
-            }
+        if(blogId){
+            updateBlog(user._id,token,blogId,blog).then(data => {
+                if(data.response?.data.error){
+                    setLoading(false)
+                    return toast.error(data.response.data.message[0])
+                }else if(data.name === 'AxiosError'){
+                    setLoading(false)
+                    return toast.error("Faild to update blog! Try again.")
+                }
 
-            toast.success("Blog Published Successfully!")
-            setLoading(false)
-        }).catch(e=> console.log(e))
+                toast.success("Blog Updated Successfully!")
+                setLoading(false)
+            }).catch(e=> console.log(e)) 
+        }else{
+            publishBlog(blog,user._id,token).then(data => {
+                if(data.response?.data.error){
+                    setLoading(false)
+                    return toast.error(data.response.data.message[0])
+                }else if(data.name === 'AxiosError'){
+                    setLoading(false)
+                    return toast.error("Faild to publish blog! Try again.")
+                }
+
+                toast.success("Blog Published Successfully!")
+                setLoading(false)
+            }).catch(e=> console.log(e))            
+        }
+
     }
 
     const hanleChange = (ev,field) => {
@@ -111,20 +130,54 @@ const BlogEditor = () => {
             setCategories(data.data)
         })
 
-        document.title = 'Publish Blog'
+        let title  = 'Publish Blog'
+        let description = 'Create Blogs the annonymus way.'
+
+        if(blogId){
+            title = 'Update Blog'
+            description = 'Update Blogs the annonymus way.'
+        }
+
+        document.title = title
         let newMetaData = document.createElement('meta')
         newMetaData.setAttribute('name','description')
-        newMetaData.setAttribute('content','Create Blogs the annonymus way.')
+        newMetaData.setAttribute('content', description)
   
         document.head.appendChild(newMetaData)
+
+        if(blogId !== undefined ){
+            loadBlogInformation()
+        }
     },[])
+
+    const loadBlogInformation = () => {
+        getBlog(blogId).then(data => {
+            if(data.response?.data.error){
+              return toast.error(data.response.data.message[0])
+            }else if(data.name === 'AxiosError'){
+              return toast.error("Faild to load blog!")
+            }
+    
+            setFormValues({
+                title: data.data.title,
+                description: data.data.description,
+                coverImage: data.data.coverImage,
+                category: {
+                    name: data.data.category.name,
+                    id: data.data.category._id
+                }
+            })
+
+            setValue(data.data.blog)
+          })
+    }
 
   return (
     <Base>
         <div className='w-[90vw] rounded-md bg-[#111] border-[1px] border-zinc-700 m-auto mt-[80px] p-[30px] flex flex-col items-center gap-[30px] relative top-0'>
             <div className='w-[calc(100%_-_60px)] h-[50px] absolute top-[5px] bg-purple-700 z-[0]'></div>
             <h1 className='w-full h-[60px] absolute top-0 text-zinc-100 font-[600] text-2xl rounded-t-md flex items-center indent-[30px] bg-[#111] bg-clip-padding backdrop-filter backdrop-blur-3xl bg-opacity-20'>
-                Write Anonymusly
+                Write Anonymusly {blogId && (' | Update')}
             </h1>
 
             <form className="w-full h-max mt-[60px] flex flex-col">
@@ -179,8 +232,8 @@ const BlogEditor = () => {
                 }} theme='snow' value={value} onChange={setValue} />
             </div>
             <div className='w-full h-max relative top-0 flex items-center justify-between'>
-                <h2 className='text-zinc-300 '>Publishing as Anonymus</h2>
-                <button onClick={handlePublish} className='px-[30px] py-[10px] font-[500] rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500'>{isLoading ? <RiLoader3Fill className='animate-spin' /> : "Publish"}</button>
+                {!blogId && (<h2 className='text-zinc-300 '>Publishing as Anonymus</h2>)}
+                <button onClick={handlePublish} className='px-[30px] py-[10px] font-[500] rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-blue-500 hover:to-cyan-500'>{isLoading ? <RiLoader3Fill className='animate-spin' /> : blogId ? "Update" : "Publish"}</button>
             </div>
         </div>
     </Base>
